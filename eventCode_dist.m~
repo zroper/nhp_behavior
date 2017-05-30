@@ -31,29 +31,9 @@ behavior.rt_end = zeros(1,length(Cajal_data.evnt.scalars.EVNT.data));
 
 for ec = 1:1:length(Cajal_data.evnt.scalars.EVNT.data)-65
     if Cajal_data.evnt.scalars.EVNT.data(ec) == 2651 % Target Onset
-        search_start = Cajal_data.evnt.scalars.EVNT.ts(ec+1);
-        search_end = search_start+1.80;
-        searching = 1;
-        counter = 1;
-        while searching ==1
-            current_time = Cajal_data.evnt.scalars.EVNT.ts(ec+counter);
-            if current_time < search_end && Cajal_data.evnt.scalars.EVNT.data(ec+counter) == 2600 %Correct
-                behavior.acc(ec) = 1;
-            elseif current_time > search_end
-                behavior.acc(ec) = 2;
-                searching = 0;
-            end
-            counter = counter + 1;
-        end
-    end
-end
-
-
-for ec = 1:1:length(Cajal_data.evnt.scalars.EVNT.data)-65
-    if Cajal_data.evnt.scalars.EVNT.data(ec) == 2651 % Target Onset
         behavior.rt_beg(ec) = Cajal_data.evnt.scalars.EVNT.ts(ec);
         search_start = Cajal_data.evnt.scalars.EVNT.ts(ec+1);
-        search_end = search_start+.5;
+        search_end = search_start+500;
         searching = 1;
         counter = 1;
         while searching ==1
@@ -114,3 +94,20 @@ for ec = 1:1:length(Cajal_data.evnt.scalars.EVNT.data)-65
     end
 end
 
+for ec = 1:1:length(Cajal_data.evnt.scalars.EVNT.data)-65
+    if Cajal_data.evnt.scalars.EVNT.data(ec) == 2651 % Target Onset
+        search_start = Cajal_data.evnt.scalars.EVNT.ts(ec+1);
+        search_end = search_start+500;
+        searching = 1;
+        counter = 1;
+        while searching ==1
+            current_time = Cajal_data.evnt.scalars.EVNT.ts(ec+counter);
+            if current_time < search_end && Cajal_data.evnt.scalars.EVNT.data(ec+counter) == 2600 %Correct
+                behavior.acc(ec) = 1;
+            elseif current_time > search_end
+                searching = 0;
+            end
+            counter = counter + 1;
+        end
+    end
+end
