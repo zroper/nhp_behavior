@@ -1,5 +1,5 @@
 events = Cajal_data.evnt.scalars.EVNT.data;
-ts = 100*Cajal_data.evnt.scalars.EVNT.ts;
+ts = 1000*Cajal_data.evnt.scalars.EVNT.ts;
 
 FID = fopen('out.csv','w');
 
